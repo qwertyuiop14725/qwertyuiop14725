@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>看我干嘛ヽ( ຶ▮ ຶ)ﾉ!!!﻿
+    看下面↓!!!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            transition: background 1s ease;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .title {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .credit {
+            color: #ffeb3b;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            font-weight: 500;
+            background: linear-gradient(45deg, #ffeb3b, #ff9800);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
+        
+        .timer-display {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 10px;
+            margin: 30px 0;
+        }
+        
+        .time-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            min-width: 70px;
+        }
+        
+        .time-value {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-radius: 15px;
+            padding: 15px 5px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            margin-bottom: 5px;
+            width: 100%;
+        }
+        
+        .time-label {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .start-date {
+            color: white;
+            margin: 20px 0;
+            font-size: 1.1rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            border-radius: 50px;
+            padding: 12px 25px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px 0 rgba(31, 38, 135, 0.2);
+        }
+        
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .color-picker {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            transition: transform 0.3s ease;
+        }
+        
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+        
+        .color-option.active {
+            border-color: white;
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 480px) {
+            .glass-card {
+                padding: 20px;
+            }
+            
+            .title {
+                font-size: 1.5rem;
+            }
+            
+            .time-value {
+                font-size: 1.5rem;
+                padding: 12px 5px;
+            }
+            
+            .time-unit {
+                min-width: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="glass-card">
+            <h1 class="title">我们的群聊时光</h1>
+            <p class="credit">由 LLH 制作 ❤️</p>
+            <p class="subtitle">从我们相遇的那一刻起</p>
+            
+            <div class="timer-display">
+                <div class="time-unit">
+                    <div class="time-value" id="years">0</div>
+                    <div class="time-label">年</div>
+                </div>
+                <div class="time-unit">
+                    <div class="time-value" id="months">0</div>
+                    <div class="time-label">月</div>
+                </div>
+                <div class="time-unit">
+                    <div class="time-value" id="days">0</div>
+                    <div class="time-label">天</div>
+                </div>
+                <div class="time-unit">
+                    <div class="time-value" id="hours">0</div>
+                    <div class="time-label">时</div>
+                </div>
+                <div class="time-unit">
+                    <div class="time-value" id="minutes">0</div>
+                    <div class="time-label">分</div>
+                </div>
+                <div class="time-unit">
+                    <div class="time-value" id="seconds">0</div>
+                    <div class="time-label">秒</div>
+                </div>
+            </div>
+            
+            <div class="start-date" id="startDateDisplay">起始日期: 2023年6月15日</div>
+            
+            <div class="controls">
+                <button class="btn" id="editBtn">修改起始时间</button>
+                <button class="btn" id="resetBtn">重置背景</button>
+            </div>
+        </div>
+        
+        <div class="glass-card">
+            <h2 class="title">选择背景颜色</h2>
+            <div class="color-picker">
+                <div class="color-option active" style="background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);" data-color="pink"></div>
+                <div class="color-option" style="background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);" data-color="blue"></div>
+                <div class="color-option" style="background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);" data-color="green"></div>
+                <div class="color-option" style="background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);" data-color="orange"></div>
+                <div class="color-option" style="background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);" data-color="purple"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 配置起始日期 - 修改这里来更改起始时间
+        let startDate = new Date('2025-09-27T08:15:00');
+        
+        // 获取DOM元素
+        const yearsEl = document.getElementById('years');
+        const monthsEl = document.getElementById('months');
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+        const startDateDisplay = document.getElementById('startDateDisplay');
+        const editBtn = document.getElementById('editBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const colorOptions = document.querySelectorAll('.color-option');
+        
+        // 更新起始日期显示
+        function updateStartDateDisplay() {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            startDateDisplay.textContent = `起始日期: ${startDate.toLocaleDateString('zh-CN', options)}`;
+        }
+        
+        // 计算并更新时间差
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - startDate;
+            
+            // 计算年、月、日、时、分、秒
+            const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+            const months = Math.floor((diff % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30.44));
+            const days = Math.floor((diff % (1000 * 60 * 60 * 24 * 30.44)) / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            // 更新显示
+            yearsEl.textContent = years;
+            monthsEl.textContent = months;
+            daysEl.textContent = days;
+            hoursEl.textContent = hours;
+            minutesEl.textContent = minutes;
+            secondsEl.textContent = seconds;
+        }
+        
+        // 修改起始时间
+        editBtn.addEventListener('click', function() {
+            const newDateStr = prompt('请输入新的起始日期 (这是一个摆设✎LLH)  :)', 
+                                    startDate.toISOString().split('T')[0]);
+            if (newDateStr) {
+                const newDate = new Date(newDateStr + 'T00:00:00');
+                if (!isNaN(newDat.getTime())) {
+                    startDate = newDate;
+                    updateStartDateDisplay();
+                    updateTimer();
+                    alert('起始日期已更新!');
+                } else {
+                    alert('日期格式无效，请使用 YYYY-MM-DD 格式');
+                }
+            }
+        });
+        
+        // 重置背景颜色
+        resetBtn.addEventListener('click', function() {
+            document.body.style.background = 'linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%)';
+            // 更新激活状态的颜色选项
+            colorOptions.forEach(option => {
+                option.classList.remove('active');
+                if (option.getAttribute('data-color') === 'pink') {
+                    option.classList.add('active');
+                }
+            });
+        });
+        
+        // 更改背景颜色
+        colorOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const color = this.getAttribute('data-color');
+                document.body.style.background = getComputedStyle(this).background;
+                
+                // 更新激活状态
+                colorOptions.forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // 初始化
+        updateStartDateDisplay();
+        updateTimer();
+        
+        // 每秒更新计时器
+        setInterval(updateTimer, 1000);
+    </script>
+    <!-- 背景音乐 -->
+<audio id="bgm" loop autoplay>
+    <source src="音乐.mp3" type="audio/mpeg">
+</audio>
+</body>
+</html>
